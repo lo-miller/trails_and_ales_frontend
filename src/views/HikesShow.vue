@@ -11,7 +11,7 @@
       <gmap-marker
         :key="index"
         v-for="(m, index) in markers"
-        :position="m"
+        :position= "marker"
         @click="center=m"
       > 
       <!-- <gmap-marker
@@ -59,11 +59,21 @@ export default {
     return {
       message: "Hike Details!",
       center: { lat: 41.9211, lng: -87.7005 },
-      markers: [{ lat: 41.9211, lng: -87.7005 }],
+      marker: {},
+      markers: [],
       currentPlace: null,
       zoom: 12,
       hike: {},
     };
+  },
+
+  mounted: function () {
+    // console.log("fetching one hike");
+    // console.log(this.$route.params.id);
+    // axios.get(`/api/hikes/${this.$route.params.id}`).then((response) => {
+    //   console.log(response.data);
+    //   this.hike = response.data;
+    // });
   },
   created: function () {
     console.log("fetching one hike");
@@ -72,6 +82,14 @@ export default {
       console.log(response.data);
       this.hike = response.data;
     });
+    console.log(this.hike.name);
+    this.marker = {
+      lat: this.hike.latitude,
+      lng: this.hikes.longitude,
+    };
+    console.log(this.marker);
+    this.markers.push(this.marker);
+    console.log(this.markers);
   },
   methods: {},
 };
