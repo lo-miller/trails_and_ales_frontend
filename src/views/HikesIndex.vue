@@ -1,13 +1,13 @@
 <template>
-  <div class="home">
+  <div class="hikes-index">
     <h1>{{ message }}</h1>
     <br>
-    <button v-on:click="hikesIndex">Load Hike Index</button>
+    <button v-on:click="hikesIndex">Reload Hikes</button>
     <br>
-    <button v-on:click="createMarkers">Create Markers</button>
+    <button v-on:click="displayHikes">Display Hikes</button>
     <br>
     <div class="map">
-      <gmap-map
+      <gmap-map ref="mapRef"
       :center="center"
       :zoom="zoom"
       style="width:100%;  height: 400px;"
@@ -30,9 +30,10 @@
     <div class="list">
       <div v-for="hike in hikes">
       <p>Name: {{hike.name}}</p>
-      <p>Coordinates: latitude:{{hike.latitude}}, longitude: {{hike.longitude}}</p>
-      <hr>
-      </div>
+      <p>Length: {{hike.length}} miles</p>
+      <p>Elevation Gain: {{hike.elevation_gain}} feet</p>
+      <a v-bind:href="`/hikes/${hike.id}`" class="button">Details</a>
+    </div>
     </div>
   </div>
 </template> 
@@ -56,8 +57,8 @@ export default {
   name: "App",
   data: function () {
     return {
-      message: "Welcome to Vue.js!",
-      center: { lat: 45.508, lng: -73.587 },
+      message: "Search for a Hike!",
+      center: { lat: 41.9211, lng: -87.7005 },
       markers: [
         // { lat: 45.508, lng: -73.587 },
         // { lat: 44.508, lng: -73.587 },
@@ -67,12 +68,20 @@ export default {
       hikes: [],
     };
   },
+  computed: {
+    // createMarkers: function () {
+    //   return this.hikes.forEach((hike) => {
+    //     hike.latitude;
+    //   });
+    // },
+  },
   mounted: function () {
-    console.log("fetching all hikes");
-    axios.get("/api/hikes").then((response) => {
-      console.log(response.data);
-      this.hikes = response.data;
-    });
+    this.hikesIndex();
+    // console.log("fetching all hikes");
+    // axios.get("/api/hikes").then((response) => {
+    //   console.log(response.data);
+    //   this.hikes = response.data;
+    // });
   },
   methods: {
     hikesIndex: function () {
@@ -86,11 +95,25 @@ export default {
       // console.log(response.data[0]);
       // this.markers = this.hikes.
     },
-    createMarkers: function () {
+    displayHikes: function () {
       console.log("creating markers");
-      console.log(this.hikes.length);
+      console.log(this.hikes[0].latitude);
+      for (var i = 0; i < this.hikes.length; i++) {
+        if (this.hikes[i].latitude !== null) {
+          const marker = {
+            lat: this.hikes[i].latitude,
+            lng: this.hikes[i].longitude,
+          };
+          this.markers.push(marker);
+        }
+      }
       // this.hikes.forEach((i) => {
       //   this.markers;
+      console.log(this.markers[0].lat);
+      console.log(this.markers.length);
+      this.$refs.mapRef.$mapPromise.then((map) => {
+        map.panTo({ lat: this.markers[0].lat, lng: this.markers[0].lng });
+      });
     },
   },
 };

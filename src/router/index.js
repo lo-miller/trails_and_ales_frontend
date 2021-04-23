@@ -1,14 +1,20 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import HikesIndex from '../views/HikesIndex.vue'
+import HikesShow from '../views/HikesShow.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/',
-    name: 'Home',
-    component: Home
+    path: '/hikes',
+    name: 'HikesIndex',
+    component: HikesIndex
+  },
+  {
+    path: '/hikes/:id',
+    name: 'HikesShow',
+    component: HikesShow
   },
   {
     path: '/about',
