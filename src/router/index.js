@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HikesIndex from '../views/HikesIndex.vue'
 import HikesShow from '../views/HikesShow.vue'
+import BreweriesSearch from '../views/BreweriesSearch.vue'
 
 Vue.use(VueRouter)
 
@@ -15,6 +16,11 @@ const routes = [
     path: '/hikes/:id',
     name: 'HikesShow',
     component: HikesShow
+  },
+  {
+    path: '/breweries',
+    name: 'BreweriesSearch',
+    component: BreweriesSearch
   },
   {
     path: '/about',

@@ -1,51 +1,24 @@
 <template>
 <div>
-  <div class="hikes-show">
+  <div class="breweries-show">
     <h1>{{ message }}</h1>
     <br>
-    <div class="map">
-      <gmap-map ref="mapRef"
-      :center="map_center"
-      :zoom="zoom"
-      style="width:100%;  height: 400px;"
-    >
-      <gmap-marker
-        :key="index"
-        v-for="(m, index) in markers"
-        :position= "m"
-        @click="center=m"
-      > 
-      <!-- <gmap-marker
-        :key="index"
-        v-for="(m, index) in markers"
-        :position="m"
-        @click="center=m"
-      > -->
-      </gmap-marker>
-    </gmap-map>
+      <div class="map">
+        <gmap-map ref="mapRef"
+        :center="map_center"
+        :zoom="zoom"
+        style="width:100%;  height: 400px;"
+      >
+        <gmap-marker
+          :key="index"
+          v-for="(m, index) in markers"
+          :position= "m"
+          @click="center=m"
+        > 
+        </gmap-marker>
+      </gmap-map>
+      </div>
     </div>
-    <div class="list">
-      <h3><a v-bind:href="hike.url">{{hike.name || ""}}</a></h3>
-      <p>Description: {{hike.description ||" "}}</p>
-      <p>Difficulty: {{hike.difficulty ||" "}}</p>
-      <p>Elevation Gain: {{hike.elevation_gain ||" "}} feet</p> 
-      <p>Highest Point: {{hike.highest_point ||" "}}</p>
-      <p>Length: {{hike.length ||" "}} miles</p>
-      <p>Features: {{hike.features}}</p>
-      <p>Required Pass: {{hike.required_pass}}</p>
-    </div>
-    <div class="brewery-search">
-      <button v-on:click="searchBreweries">Search for nearby breweries</button>
-      <br>
-    </div>
-    </div>
-  <div class="brewery-list" v-for="brewery in breweries">
-    <p>Name: {{brewery.name}}</p> 
-    <p>Location: {{brewery.vicinity}}</p> 
-    <p>Rating: {{brewery.rating}}</p> 
-    <p>Open now: {{brewery.opening_hours.open_now}}</p>
-    <hr>
-  </div>
   </div>
 </template> 
 
@@ -85,8 +58,9 @@ export default {
   },
   created: function () {},
   methods: {
-    hikesShow: function () {
-      console.log("fetching one hike");
+    breweriesShow: function () {
+      var params;
+      console.log("fetching one brewery");
       console.log(this.$route.params.id);
       axios.get(`/api/hikes/${this.$route.params.id}`).then((response) => {
         console.log(response.data);
@@ -111,6 +85,8 @@ export default {
       var params = {
         location: `${this.hike.latitude},${this.hike.longitude}`,
       };
+
+      // "https://maps.googleapis.com/maps/api/place/details/json?placeid=ChIJrTLr-GyuEmsRBfy61i59si0&key=YOUR_API_KEY"
       axios
         .get("/api/search_results", { params })
         .then((response) => {
@@ -139,4 +115,5 @@ export default {
   },
 };
 </script>
+
 
