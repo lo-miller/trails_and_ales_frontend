@@ -1,59 +1,78 @@
 <template>
-<div>
-  <div class="hikes-show">
-    <h1>{{ message }}</h1>
-    <br>
-    <div class="map">
-      <gmap-map ref="mapRef"
-      :center="map_center"
-      :zoom="zoom"
-      style="width:100%;  height: 400px;"
-    >
-      <gmap-marker
-        :key="index"
-        v-for="(m, index) in markers"
-        :position= "m"
-        @click="center=m"
-      > 
-      <!-- <gmap-marker
-        :key="index"
-        v-for="(m, index) in markers"
-        :position="m"
-        @click="center=m"
-      > -->
-      </gmap-marker>
-    </gmap-map>
+<div class="hikes-show">
+    <div class="wrapper style1">
+      <div class="inner">
+
+        <!-- Feature 1 -->
+        <section class="container box feature1">
+          <div class="row">
+            <div class="col-12">
+              <header class="first major">
+                <h2><a v-bind:href="hike.url">{{hike.name || ""}}</a></h2>
+                <!-- <p>Description: {{hike.description ||" "}}</p>
+                <p>Difficulty: {{hike.difficulty ||" "}}</p> -->
+                <p>Elevation Gain: {{hike.elevation_gain ||" "}} feet</p> 
+                <p>Highest Point: {{hike.highest_point ||" "}}</p>
+                <p>Length: {{hike.length ||" "}} miles</p>
+                <p>Features: {{hike.features}}</p>
+                <p>Required Pass: {{hike.required_pass}}</p>
+                <p><a v-bind:href="hike.url">More information</a></p>
+                <button v-on:click="searchBreweries" style="margin-bottom: 2em">Search for nearby breweries</button>
+                <br>
+              </header>
+              <div class="map">
+                <gmap-map ref="mapRef"
+                  :center="map_center"
+                  :zoom="zoom"
+                  style="width:100%;  height: 800px;">
+                  <gmap-marker
+                    :key="index"
+                    v-for="(m, index) in markers"
+                    :position= "m"
+                    @click="center=m"
+                  > 
+                  <!-- <gmap-marker
+                    :key="index"
+                    v-for="(m, index) in markers"
+                    :position="m"
+                    @click="center=m"
+                  > -->
+                  </gmap-marker>
+                </gmap-map>
+              </div>
+            </div>
+          </div>
+        </section>
+        <div class="container">
+          <div class="row">
+            <div class="col-12">
+              <!-- Article list -->
+              <section class="box article-list" style="width=100%">
+                <h2 class="second icon solid fa-beer">Nearby Breweries</h2>
+                <div class="row">
+                  <article class="col-12-medium" v-for="brewery in breweries">
+                    <h4>{{brewery.name}}</h4> 
+                    <p>{{brewery.vicinity}}</p> 
+                    <p>Rating: {{brewery.rating}}</p> 
+                    <p>Open now? {{brewery.opening_hours.open_now}}</p>
+                  </article>	
+                </div>
+              </section>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="list">
-      <h3><a v-bind:href="hike.url">{{hike.name || ""}}</a></h3>
-      <p>Description: {{hike.description ||" "}}</p>
-      <p>Difficulty: {{hike.difficulty ||" "}}</p>
-      <p>Elevation Gain: {{hike.elevation_gain ||" "}} feet</p> 
-      <p>Highest Point: {{hike.highest_point ||" "}}</p>
-      <p>Length: {{hike.length ||" "}} miles</p>
-      <p>Features: {{hike.features}}</p>
-      <p>Required Pass: {{hike.required_pass}}</p>
-    </div>
-    <div class="brewery-search">
-      <button v-on:click="searchBreweries">Search for nearby breweries</button>
-      <br>
-    </div>
-    </div>
-  <div class="brewery-list" v-for="brewery in breweries">
-    <p>Name: {{brewery.name}}</p> 
-    <p>Location: {{brewery.vicinity}}</p> 
-    <p>Rating: {{brewery.rating}}</p> 
-    <p>Open now: {{brewery.opening_hours.open_now}}</p>
-    <hr>
   </div>
-  </div>
+  
+
 </template> 
 
 <style>
-#map {
+/* #map {
   width: 100%;
   height: 400px;
-}
+} */
 html,
 body {
   height: 100%;

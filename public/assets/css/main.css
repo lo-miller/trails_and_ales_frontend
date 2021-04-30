@@ -237,6 +237,13 @@ input, select, textarea {
 
 		}
 
+/*Map */
+
+	.map {
+		width: 100%;
+  	height: 100%;
+	}
+
 /* Row */
 
 	.row {
@@ -327,7 +334,7 @@ input, select, textarea {
 		}
 
 		.row > .off-6 {
-			margin-left: 50%;
+			margin-left: 45%;
 		}
 
 		.row > .col-7 {
@@ -430,7 +437,7 @@ input, select, textarea {
 				}
 
 		.row {
-			margin-top: -50px;
+			margin-top: 0;
 			margin-left: -50px;
 		}
 
@@ -1660,7 +1667,8 @@ input, select, textarea {
 	.box.article-list article {
 		border-bottom: solid 1px #dbdbdb;
 		margin: 0 0 2.75em 0;
-		padding: 0 0 2.75em 0;
+		padding: 0 0 2.75em 1.00em;
+		width: 33.33%;
 	}
 
 		.box.article-list article:last-child {
@@ -1795,7 +1803,7 @@ input, select, textarea {
 			border-left: 0;
 			border-right: 0;
 			color: #fff;
-			color: rgba(255, 255, 255, 0.75);
+			color: rgba(255, 255, 255, 0.9);
 			font-size: 2.35em;
 			font-weight: 700;
 			line-height: 1.3em;
@@ -1828,14 +1836,14 @@ input, select, textarea {
 		#banner p {
 			text-transform: uppercase;
 			color: #fff;
-			color: rgba(255, 255, 255, 0.75);
+			color: rgba(255, 255, 255, 0.9);
 			font-size: 1.5em;
 			font-weight: 700;
 			line-height: 1.3em;
 			letter-spacing: 0.04em;
 			float: left;
-			text-align: right;
-			width: 60%;
+			text-align: center;
+			width: 100%;
 			line-height: 1.5em;
 			margin: 0;
 		}
@@ -1853,6 +1861,7 @@ input, select, textarea {
 		background-position: top left, center center;
 		background-size: auto, cover;
 		padding: 3em 0;
+		background-color: rgba(0, 0, 0, 0.9);
 	}
 
 	#main-wrapper {
@@ -2326,6 +2335,7 @@ input, select, textarea {
 
 			section, article {
 				margin-bottom: 3em;
+
 			}
 
 		/* Image */

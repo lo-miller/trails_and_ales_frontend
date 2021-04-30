@@ -23,10 +23,10 @@
 </template> 
 
 <style>
-#map {
+/* #map {
   width: 100%;
   height: 400px;
-}
+} */
 html,
 body {
   height: 100%;

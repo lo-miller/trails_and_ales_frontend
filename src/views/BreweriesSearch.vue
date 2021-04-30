@@ -1,12 +1,17 @@
 <template>
-  <div class="breweryMap" ref="map">
-    <button v-on:click="searchBreweries">Search nearby breweries</button>
-    <div class="breweryList" v-for="brewery in breweries">
-      <p>Name: {{brewery.name}}</p> 
-      <p>Location: {{brewery.vicinity}}</p> 
-      <p>Rating: {{brewery.rating}}</p> 
-      <p>Open now: {{brewery.opening_hours.open_now}}</p>
-      <hr>
+  <div>
+    <div class="wrapper style1">
+      <div class="inner">
+          <section class="container box feature1">
+            <div class="row">
+              <div class="col-12">
+                <header class="first major">
+                  <h2>Brewery Search Coming Soon</h2>
+                </header>
+              </div>
+            </div>
+          </section>
+      </div>
     </div>
   </div>
 </template>
