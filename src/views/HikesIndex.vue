@@ -10,8 +10,16 @@
               <div class="col-12">
                 <header class="first major">
                   <h2>Search for a hike below</h2>
-                  <button v-on:click="displayHikes" style="margin-bottom: 2em">Display Hikes</button>
                   <br />
+                  <div class="search">
+                    <v-select v-model="selected" :options= "searchSelectOptions" :reduce="state => state.code" label="state" />
+                      <!-- <option value="" disabled selected>Choose a state to hike in</option>
+                      <option value="WA">Washington</option>
+                      <option value="NC">North Carolina</option> -->
+                    <button v-on:click="hikesIndex" style="margin-bottom: 2em">Search for Hikes</button>
+                    <button v-on:click="displayHikes" style="margin-bottom: 2em">Show Markers</button>
+                  </div>
+
                 </header>
                 <div class="map">
                   <gmap-map ref="mapRef"
@@ -19,14 +27,26 @@
                   :zoom="zoom"
                   style="width:100%;  height: 800px;"
                 >
-                  <gmap-marker
-                    :key="index"
-                    v-for="(m, index) in markers"
-                    :position="m"
-                    @click="center=m"
-                  >
-                  </gmap-marker>
-                </gmap-map>
+                    <gmap-marker
+                      :key="index"
+                      v-for="(m, index) in markers"
+                      :position="m"
+                      :clickable="true"
+                      @click="toggleInfo(m,index)"
+                    >
+                    </gmap-marker>
+                    
+                    <gmap-info-window
+                    :options="infoOptions"
+                    :position="infoPosition"
+                    :opened="infoOpened"
+                    @closeclick="infoOpened=false">
+                      {{infoContent}}
+                      <br>
+                      <a v-bind:href="infoLink">Details</a>
+                    </gmap-info-window>
+
+                  </gmap-map>
                 </div>
               </div>
             </div>
@@ -82,62 +102,87 @@ export default {
     return {
       message: "Search for a Hike!",
       center: { lat: 41.9211, lng: -87.7005 },
-      markers: [
-        // { lat: 45.508, lng: -73.587 },
-        // { lat: 44.508, lng: -73.587 },
-      ],
+      markers: [],
       currentPlace: null,
       zoom: 8,
       hikes: [],
+      infoPosition: null,
+      infoOpened: false,
+      infoContent: null,
+      infoCurrentKey: null,
+      infoLink: null,
+      infoOptions: {
+        pixelOffset: {
+          width: 0,
+          height: -35,
+        },
+      },
+      searchSelectOptions: [
+        { state: "North Carolina", code: "NC" },
+        { state: "Washington", code: "WA" },
+      ],
+      selected: "",
     };
   },
-  computed: {
-    // createMarkers: function () {
-    //   return this.hikes.forEach((hike) => {
-    //     hike.latitude;
-    //   });
-    // },
-  },
+  computed: {},
   mounted: function () {
-    this.hikesIndex();
-    // console.log("fetching all hikes");
-    // axios.get("/api/hikes").then((response) => {
-    //   console.log(response.data);
-    //   this.hikes = response.data;
+    // this.hikesIndex();
+    // $(document).ready(function () {
+    //   $(".mdb-select").materialSelect();
     // });
   },
   methods: {
     hikesIndex: function () {
+      var params = {
+        state: this.selected,
+      };
+      console.log(this.selected);
       console.log("fetching all hikes");
-      axios.get("/api/hikes").then((response) => {
+      axios.get("/api/hikes", { params }).then((response) => {
         console.log(response.data);
         this.hikes = response.data;
       });
       console.log(this.hikes.length);
-      // console.log("feching first hike");
-      // console.log(this.hikes[0]);
-      // console.log(response.data[0]);
-      // this.markers = this.hikes.
+      // console.log(this.params);
     },
     displayHikes: function () {
+      console.log(this.selected);
       console.log("creating markers");
       console.log(this.hikes[0].latitude);
       for (var i = 0; i < this.hikes.length; i++) {
         if (this.hikes[i].latitude !== null) {
           const marker = {
+            name: this.hikes[i].name,
+            url: `/hikes/${this.hikes[i].id}`,
             lat: this.hikes[i].latitude,
             lng: this.hikes[i].longitude,
           };
           this.markers.push(marker);
         }
       }
-      // this.hikes.forEach((i) => {
-      //   this.markers;
       console.log(this.markers[0].lat);
       console.log(this.markers.length);
       this.$refs.mapRef.$mapPromise.then((map) => {
         map.panTo({ lat: this.markers[0].lat, lng: this.markers[0].lng });
       });
+    },
+    getPosition: function (marker) {
+      return {
+        lat: parseFloat(marker.lat),
+        lng: parseFloat(marker.lng),
+      };
+    },
+    toggleInfo: function (marker, index) {
+      this.infoPosition = this.getPosition(marker);
+      this.infoContent = marker.name;
+      this.infoLink = marker.url;
+      console.log(this.infoPosition);
+      if (this.infoCurrentKey == index) {
+        this.infoOpened = !this.infoOpened;
+      } else {
+        this.infoOpened = true;
+        this.infoCurrentKey = index;
+      }
     },
   },
 };

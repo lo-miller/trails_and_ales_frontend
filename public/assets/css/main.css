@@ -1283,6 +1283,13 @@ input, select, textarea {
 			position: relative;
 			top: -1em;
 		}
+		select {
+			text-rendering: optimizelegibility;
+			-moz-osx-font-smoothing: grayscale;
+			-moz-text-size-adjust: none;
+			width: 300px;
+			margin: auto;
+		}
 
 /* Forms */
 
@@ -2372,6 +2379,14 @@ input, select, textarea {
 				ul.actions li:first-child {
 					margin-top: 0;
 				}
+
+		/* Search */
+		.search {
+			text-rendering: optimizelegibility;
+			-moz-osx-font-smoothing: grayscale;
+			-moz-text-size-adjust: none;
+			width: 200px;
+		}
 
 		/* Box */
 

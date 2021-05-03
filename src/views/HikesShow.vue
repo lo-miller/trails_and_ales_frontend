@@ -16,6 +16,9 @@
                 <p>Length: {{hike.length ||" "}} miles</p>
                 <p>Features: {{hike.features}}</p>
                 <p>Required Pass: {{hike.required_pass}}</p>
+                <p>Stolen and traditional territory of the
+                  <span v-for="territory in territories">
+                  {{territory.properties.Name}},</span> people</p>
                 <p><a v-bind:href="hike.url">More information</a></p>
                 <button v-on:click="searchBreweries" style="margin-bottom: 2em">Search for nearby breweries</button>
                 <br>
@@ -55,6 +58,8 @@
                     <p>{{brewery.vicinity}}</p> 
                     <p>Rating: {{brewery.rating}}</p> 
                     <p>Open now? {{brewery.opening_hours.open_now}}</p>
+                    <p>Distance to trailhead: {{brewery.distance}} km </p>
+                    <!-- <button v-on:click="getDistance(brewery)" style="margin-bottom: 2em">Distance</button> -->
                   </article>	
                 </div>
               </section>
@@ -96,6 +101,7 @@ export default {
       hike: {},
       breweries: [],
       brewery: {},
+      territories: [],
     };
   },
 
@@ -124,6 +130,17 @@ export default {
             lng: this.hike.longitude,
           });
         });
+        var nativeLand = this.nativeLand();
+      });
+    },
+    nativeLand() {
+      var params = {
+        location: `${this.hike.latitude},${this.hike.longitude}`,
+      };
+      console.log(params);
+      axios.get("/api/territories", { params }).then((response) => {
+        console.log(response.data);
+        this.territories = response.data;
       });
     },
     searchBreweries() {
@@ -148,12 +165,46 @@ export default {
               };
               this.markers.push(marker);
             }
+            var distance = this.getDistance(this.breweries[i]);
+            console.log(distance);
+            this.breweries[i]["distance"] = distance;
+            console.log(this.breweries[i]);
           }
-          console.log(this.breweries[0]["place_id"]);
+          console.log(this.breweries[3]);
         })
         .catch((error) => {
           console.log(error.message);
         });
+    },
+    degreesToRadians: function (degrees) {
+      return (degrees * Math.PI) / 180;
+    },
+    getDistance: function (brewery) {
+      console.log(brewery);
+      var lat1 = (this.hike.latitude * Math.PI) / 180;
+      var lat2 = (brewery["geometry"]["location"]["lat"] * Math.PI) / 180;
+      var lng1 = (this.hike.longitude * Math.PI) / 180;
+      var lng2 = (brewery["geometry"]["location"]["lng"] * Math.PI) / 180;
+      console.log(lat1);
+      console.log(lng2);
+      var latDiff = lat2 - lat1;
+      var lngDiff = lng2 - lng1;
+      var a =
+        Math.sin(latDiff / 2) * Math.sin(latDiff / 2) +
+        Math.cos(lat1) *
+          Math.cos(lat2) *
+          Math.sin(lngDiff / 2) *
+          Math.sin(lngDiff / 2);
+      var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+      var dist = (c * 6371000) / 1000;
+
+      // var dist = Math.acos(
+      //   Math.sin(lat1) * Math.sin(lat2) +
+      //     Math.cos(lat1) * Math.cos(lat2) * Math.cos(lngDiff)
+      // );
+      console.log(dist);
+
+      return dist;
     },
   },
 };
