@@ -1236,7 +1236,7 @@ input, select, textarea {
 	}
 
 	header {
-		margin: 0 0 2em 0;
+		margin: 0 0 0 0;
 	}
 
 		header h2, header h3 {
@@ -1301,6 +1301,7 @@ input, select, textarea {
 		color: #404248;
 		margin: 0 0 1em 0;
 		font-size: 0.8em;
+		text-align: left;
 	}
 
 	form input[type="text"],
@@ -1459,7 +1460,7 @@ input, select, textarea {
 		display: inline-block;
 		background-color: #4091bf;
 		border-radius: 8px;
-		box-shadow: inset 0px 0px 0px 1px rgba(0, 0, 0, 0.35), inset 0px 2px 1px 0px rgba(255, 255, 255, 0.35);
+		/* box-shadow: inset 0px 0px 0px 1px rgba(0, 0, 0, 0.35), inset 0px 2px 1px 0px rgba(255, 255, 255, 0.35); */
 		text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.5);
 		color: #fff !important;
 		text-decoration: none;
@@ -1684,6 +1685,87 @@ input, select, textarea {
 			padding-bottom: 0;
 		}
 
+		/* Navbar container */
+.navbar {
+  overflow: hidden;
+  /* background-color: #333; */
+  font-family: Arial;
+}
+
+/* Links inside the navbar */
+.navbar a {
+  float: left;
+  font-size: 16px;
+  color: white;
+  text-align: center;
+  padding: 14px 0;
+  text-decoration: none;
+}
+
+/* The dropdown container */
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+/* Dropdown button */
+.dropdown .dropbtn {
+  /* font-size: 16px; */
+  border: none !important;
+	font-weight: 800;
+	font-size: 0.95em;
+	letter-spacing: 0.075em;
+	padding: 0.5em 0.8em 0.5em 0.8em;
+	border-radius: 6px;
+	outline: 0;
+	text-transform: uppercase;
+  color: white;
+	border-radius: 0px;
+	/* margin: 10px 30px; */
+  background-color: inherit;
+	background: transparent;
+  font-family: inherit; 
+  margin: 0; 
+}
+
+/* Add a red background color to navbar links on hover */
+.navbar a:hover, .dropdown:hover .dropbtn {
+  background-color: whitesmoke;
+}
+
+/* Dropdown content (hidden by default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 12px ;
+  text-decoration: none;
+	block-size: auto;
+  display: block;
+  text-align: left;
+	font-family: inherit;
+	font-size: inherit;
+	font-weight: inherit;
+
+}
+
+/* Add a grey background color to dropdown links on hover */
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
 /* Icons */
 
 	.icon {
@@ -1737,7 +1819,7 @@ input, select, textarea {
 				font-weight: 800;
 				font-size: 0.95em;
 				letter-spacing: 0.075em;
-				padding: 0.5em 0.8em 0.5em 0.8em;
+				/* padding: 0.5em 0.8em 0.5em 0.8em; */
 				border-radius: 6px;
 				outline: 0;
 			}
@@ -1864,11 +1946,12 @@ input, select, textarea {
 /* Wrappers */
 
 	#header-wrapper {
-		background: url("images/bg01.png"), url("../../images/DSC_0078.JPG");
+		background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url("../../images/DSC_0078.JPG");
 		background-position: top left, center center;
 		background-size: auto, cover;
 		padding: 3em 0;
 		background-color: rgba(0, 0, 0, 0.9);
+
 	}
 
 	#main-wrapper {
@@ -1892,7 +1975,7 @@ input, select, textarea {
 	}
 
 		.wrapper > .inner {
-			position: relative;
+			position: static;
 			z-index: 2;
 		}
 
@@ -1920,8 +2003,8 @@ input, select, textarea {
 
 	#header {
 		position: relative;
-		border-radius: 10px;
-		background: rgba(255, 255, 255, 0.1);
+		border-radius: 0px;
+		background: rgba(255, 255, 255, 0.057);
 		padding: 0.75em;
 		margin-bottom: 0;
 	}
@@ -2025,7 +2108,7 @@ input, select, textarea {
 		/* Wrappers */
 
 			#header-wrapper {
-				padding: 2em 0;
+				padding: 0 0;
 			}
 
 			body.homepage #header-wrapper {
@@ -2045,12 +2128,13 @@ input, select, textarea {
 			#banner {
 				width: 100%;
 				padding: 4em 0 2em 0;
+				vertical-align: middle;
 			}
 
 				#banner h2 {
 					font-size: 2.2em;
 					line-height: 1.3em;
-					margin: 0 0 1em 0;
+					margin: 0 0 0 0;
 				}
 
 				#banner p {
@@ -2289,7 +2373,8 @@ input, select, textarea {
 
 			.homepage #header-wrapper {
 				display: block;
-				padding-top: 44px;
+				padding-top: 0px;
+				
 			}
 
 			#main-wrapper {
@@ -2414,6 +2499,7 @@ input, select, textarea {
 
 			#header-wrapper {
 				background-position: 35% 50%;
+				
 			}
 
 			#footer-wrapper {

@@ -9,8 +9,8 @@
             <div class="col-12">
               <header class="first major">
                 <h2><a v-bind:href="hike.url">{{hike.name || ""}}</a></h2>
-                <!-- <p>Description: {{hike.description ||" "}}</p>
-                <p>Difficulty: {{hike.difficulty ||" "}}</p> -->
+                <p v-if="hike.description !== null ">Description: {{hike.description ||" "}}</p>
+                <p>Difficulty: {{hike.difficulty ||" "}}</p> 
                 <p>Elevation Gain: {{hike.elevation_gain ||" "}} feet</p> 
                 <p>Highest Point: {{hike.highest_point ||" "}}</p>
                 <p>Length: {{hike.length ||" "}} miles</p>
@@ -20,6 +20,7 @@
                   <span v-for="territory in territories">
                   {{territory.properties.Name}},</span> people</p>
                 <p><a v-bind:href="hike.url">More information</a></p>
+                <button v-on:click="saveThisHike">Save this hike</button>
                 <button v-on:click="searchBreweries" style="margin-bottom: 2em">Search for nearby breweries</button>
                 <br>
               </header>
@@ -102,6 +103,7 @@ export default {
       breweries: [],
       brewery: {},
       territories: [],
+      errors: [],
     };
   },
 
@@ -205,6 +207,20 @@ export default {
       console.log(dist);
 
       return dist;
+    },
+    saveThisHike: function () {
+      var params = {
+        hike_id: this.hike.id,
+      };
+      axios
+        .post("/api/saved_hikes", params)
+        .then((response) => {
+          console.log(response.data);
+          this.$router.push("/saved_hikes");
+        })
+        .catch((error) => {
+          this.errors = error.response.data.errors;
+        });
     },
   },
 };

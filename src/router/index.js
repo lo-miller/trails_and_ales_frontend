@@ -5,6 +5,11 @@ import About from '../views/About.vue'
 import HikesIndex from '../views/HikesIndex.vue'
 import HikesShow from '../views/HikesShow.vue'
 import BreweriesSearch from '../views/BreweriesSearch.vue'
+import Signup from "../views/Signup.vue";
+import Login from "../views/Login.vue";
+import Logout from "../views/Logout.vue";
+import SavedHikes from "../views/SavedHikes.vue";
+
 
 Vue.use(VueRouter)
 
@@ -20,9 +25,29 @@ const routes = [
     component: HikesIndex
   },
   {
+    path: '/saved_hikes',
+    name: 'SavedHikes',
+    component: SavedHikes
+  },
+  {
     path: '/hikes/:id',
     name: 'HikesShow',
     component: HikesShow
+  },
+  {
+    path: '/signup',
+    name: 'Signup',
+    component: Signup
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: Login
+  },
+  {
+    path: '/logout',
+    name: 'Logout',
+    component: Logout
   },
   {
     path: '/breweries',
