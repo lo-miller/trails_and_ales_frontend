@@ -9,6 +9,10 @@ import Signup from "../views/Signup.vue";
 import Login from "../views/Login.vue";
 import Logout from "../views/Logout.vue";
 import SavedHikes from "../views/SavedHikes.vue";
+import FeaturedAdventures from "../views/FeaturedAdventures.vue";
+import BeerTrails from "../views/BeerTrails.vue";
+import Resources from "../views/Resources.vue";
+import LandAcknowledgement from "../views/LandAcknowledgement.vue";
 
 
 Vue.use(VueRouter)
@@ -53,6 +57,26 @@ const routes = [
     path: '/breweries',
     name: 'BreweriesSearch',
     component: BreweriesSearch
+  },
+  {
+    path: '/beer_trails',
+    name: 'BeerTrails',
+    component: BeerTrails
+  },
+  {
+    path: '/resources',
+    name: 'Resources',
+    component: Resources
+  },
+  {
+    path: '/featured',
+    name: 'FeaturedAdventures',
+    component: FeaturedAdventures
+  },
+  {
+    path: '/land_acknowledgement',
+    name: 'LandAcknowledgement',
+    component: LandAcknowledgement
   },
   {
     path: '/about',

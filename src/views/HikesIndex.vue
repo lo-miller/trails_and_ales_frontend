@@ -3,64 +3,49 @@
 
     <div class="wrapper style1">
       <div class="inner">
-
-        <!-- Feature 1 -->
-          <section class="container box feature1">
-            <div class="row">
-              <div class="col-12">
-                <header class="first major">
-                  <h2>Search for a hike below</h2>
-                  <br />
-                  <div class="search">
-                    <v-select v-model="selected" :options= "searchSelectOptions" :reduce="state => state.code" label="state" />
-                      <!-- <option value="" disabled selected>Choose a state to hike in</option>
-                      <option value="WA">Washington</option>
-                      <option value="NC">North Carolina</option> -->
-                    <button v-on:click="hikesIndex" style="margin-bottom: 2em">Search for Hikes</button>
-                    <button v-on:click="displayHikes" style="margin-bottom: 2em">Show Markers</button>
-                  </div>
-
-                </header>
-                <div class="map">
-                  <gmap-map ref="mapRef"
-                  :center="center"
-                  :zoom="zoom"
-                  style="width:100%;  height: 800px;"
-                >
-                    <gmap-marker
-                      :key="index"
-                      v-for="(m, index) in markers"
-                      :position="m"
-                      :clickable="true"
-                      @click="toggleInfo(m,index)"
-                    >
-                    </gmap-marker>
-                    
-                    <gmap-info-window
-                    :options="infoOptions"
-                    :position="infoPosition"
-                    :opened="infoOpened"
-                    @closeclick="infoOpened=false">
-                      {{infoContent}}
-                      <br>
-                      <a v-bind:href="infoLink">Details</a>
-                    </gmap-info-window>
-
-                  </gmap-map>
+        <section class="container box feature1">
+          <div class="row">
+            <div class="col-12">
+              <header class="first major">
+                <h2>Search for a hike below</h2>
+                <br />
+                <div class="search" style="width:400px;margin-left:auto;margin-right:auto">
+                  <v-select v-model="selected" :options= "searchSelectOptions" :reduce="state => state.code" label="state" placeholder="select a state"/>
+                  <button v-on:click="hikesIndex" style="margin: 2em">Search for Hikes</button>
                 </div>
+              </header>
+              <div class="map">
+                <gmap-map ref="mapRef"
+                :center="center"
+                :zoom="zoom"
+                map-type-id="terrain"
+                style="width:100%;  height: 800px;"
+              >
+                  <gmap-marker
+                    :key="index"
+                    v-for="(m, index) in markers"
+                    :position="m"
+                    :clickable="true"
+                    @click="toggleInfo(m,index)"
+                  >
+                  </gmap-marker>
+                  
+                  <gmap-info-window
+                  :options="infoOptions"
+                  :position="infoPosition"
+                  :opened="infoOpened"
+                  @closeclick="infoOpened=false">
+                    {{infoContent}}
+                    <br>
+                    <a v-bind:href="infoLink">Details</a>
+                  </gmap-info-window>
+
+                </gmap-map>
               </div>
             </div>
-          </section>
-      </div>
-    </div>
-
-    <div class="wrapper style3">
-      <div class="inner">
-        <div class="container">
+          </div>
           <div class="row">
             <div class="col-12-large">
-
-              <!-- Article list -->
               <section class="box article-list">
                 <h2 class="second icon solid fa-mountain">Nearby Hikes</h2>
                 <div class="row">
@@ -71,11 +56,11 @@
                     <p>Elevation Gain: {{hike.elevation_gain}} feet</p>
                     <a v-bind:href="`/hikes/${hike.id}`" class="button">Details</a>
                   </article>	
-						    </div>
+                </div>
               </section>
             </div>
           </div>
-        </div>
+        </section>
       </div>
     </div>
   </div>
@@ -118,19 +103,67 @@ export default {
         },
       },
       searchSelectOptions: [
-        { state: "North Carolina", code: "NC" },
-        { state: "Washington", code: "WA" },
+        { code: "AK", state: "Alaska" },
+        { code: "AL", state: "Alabama" },
+        { code: "AR", state: "Arkansas" },
+        { code: "AS", state: "American Samoa" },
+        { code: "AZ", state: "Arizona" },
+        { code: "CA", state: "California" },
+        { code: "CO", state: "Colorado" },
+        { code: "CT", state: "Connecticut" },
+        { code: "DC", state: "District of Columbia" },
+        { code: "DE", state: "Delaware" },
+        { code: "FL", state: "Florida" },
+        { code: "GA", state: "Georgia" },
+        { code: "GU", state: "Guam" },
+        { code: "HI", state: "Hawaii" },
+        { code: "IA", state: "Iowa" },
+        { code: "ID", state: "Idaho" },
+        { code: "IL", state: "Illinois" },
+        { code: "IN", state: "Indiana" },
+        { code: "KS", state: "Kansas" },
+        { code: "KY", state: "Kentucky" },
+        { code: "LA", state: "Louisiana" },
+        { code: "MA", state: "Massachusetts" },
+        { code: "MD", state: "Maryland" },
+        { code: "ME", state: "Maine" },
+        { code: "MI", state: "Michigan" },
+        { code: "MN", state: "Minnesota" },
+        { code: "MO", state: "Missouri" },
+        { code: "MS", state: "Mississippi" },
+        { code: "MT", state: "Montana" },
+        { code: "NC", state: "North Carolina" },
+        { code: "ND", state: "North Dakota" },
+        { code: "NE", state: "Nebraska" },
+        { code: "NH", state: "New Hampshire" },
+        { code: "NJ", state: "New Jersey" },
+        { code: "NM", state: "New Mexico" },
+        { code: "NV", state: "Nevada" },
+        { code: "NY", state: "New York" },
+        { code: "OH", state: "Ohio" },
+        { code: "OK", state: "Oklahoma" },
+        { code: "OR", state: "Oregon" },
+        { code: "PA", state: "Pennsylvania" },
+        { code: "PR", state: "Puerto Rico" },
+        { code: "RI", state: "Rhode Island" },
+        { code: "SC", state: "South Carolina" },
+        { code: "SD", state: "South Dakota" },
+        { code: "TN", state: "Tennessee" },
+        { code: "TX", state: "Texas" },
+        { code: "UT", state: "Utah" },
+        { code: "VA", state: "Virginia" },
+        { code: "VI", state: "Virgin Islands" },
+        { code: "VT", state: "Vermont" },
+        { code: "WA", state: "Washington" },
+        { code: "WI", state: "Wisconsin" },
+        { code: "WV", state: "West Virginia" },
+        { code: "WY", state: "Wyoming" },
       ],
       selected: "",
     };
   },
   computed: {},
-  mounted: function () {
-    // this.hikesIndex();
-    // $(document).ready(function () {
-    //   $(".mdb-select").materialSelect();
-    // });
-  },
+  mounted: function () {},
   methods: {
     hikesIndex: function () {
       var params = {
@@ -141,6 +174,7 @@ export default {
       axios.get("/api/hikes", { params }).then((response) => {
         console.log(response.data);
         this.hikes = response.data;
+        this.displayHikes();
       });
       console.log(this.hikes.length);
       // console.log(this.params);

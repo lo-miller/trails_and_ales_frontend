@@ -7,12 +7,14 @@
             <div class="col-12-large">
               <section class="box article-list">
                 <h2 class="second icon solid fa-mountain">Your Saved Hikes</h2>
-                <p> Happy Trails! </p>
-                <div class="row">
-                  <article class="col-12-medium" v-for="savedHike in savedHikes">
+                <h3> Happy Trails! </h3>
+                <br />
+                <div class="row" style="margin-left:0px">
+                  <article class="col-12-medium" v-for="savedHike in savedHikes" style="width:300px">
                     <a href="images/fulls/01.jpg" class="image fit thumb"><img src="images/thumbs/01.jpg" alt="" /></a>
-                    <h3>{{savedHike.hike_name}}</h3>
-                    <a v-bind:href="`/hikes/${savedHike.hike_id}`" class="button">Details</a>
+                    <h4 style="min-height:50px">{{savedHike.hike_name}}</h4>
+                    <p>Brewery: {{savedHike.brewery_name}}</p>
+                    <a v-bind:href="`/hikes/${savedHike.hike}`" class="button">Details</a>
                   </article>	
 						    </div>
               </section>

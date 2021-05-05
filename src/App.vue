@@ -1,18 +1,14 @@
 <template>
   <div id="app">
     <div id="page-wrapper">
-
 			<!-- Header -->
       <div id="header-wrapper">
         <div class="container">
-
           <!-- Header -->
             <header id="header">
               <div class="inner">
-
                 <!-- Logo -->
-                  <h1><a href="/" id="logo">Trails and Ales</a></h1>
-
+                  <h2 style="margin:auto;vertical-align:center"><a href="/" id="logo"><span><img src="images/logo.png" alt="" style=";width:5%;height:auto;margin: 10px;"/></span></a></h2>
                 <!-- Nav -->
                   <nav id="nav">
                     <div class="navbar">
@@ -27,7 +23,14 @@
                           <button class="dropbtn">Plan<i class="fa fa-carat-down"></i></button>
                           <div class="dropdown-content">
                             <a href="/saved_hikes">Saved Adventures</a>
-                            <a href="#">Featured Adventures</a>
+                            <a href="/featured">Featured Adventures</a>
+                          </div>
+                        </div>
+                        <div class="dropdown">
+                          <button class="dropbtn" href="/beer_trails">Resources<i class="fa fa-carat-down"></i></button>
+                          <div class="dropdown-content">
+                            <a href="/beer_trails">Beer Trails</a>
+                            <a href="/land_acknowledgement">Land Acknowledgement</a>
                           </div>
                         </div>
                         <div class="dropdown">
@@ -36,24 +39,18 @@
                             <a href="/signup">Sign Up</a>
                             <a href="/login">Login</a>
                             <a href="/logout">Logout</a>
-                            <a href="#">Resources</a>
-                              <div class="dropdown-content">
-                                <a href="#">Beer Trails</a>
-                                <a href="#">Land Acknowledgement</a>
-                                <a href="/about">About</a>
-                              </div>
+                            <a href="/about">About</a>
                           </div>
-                        </div>
+                        </div>                       
                     </div>
                   </nav>
               </div>
             </header>
-
           <!-- Banner -->
             <div id="banner" style="vertical-align: middle">
               <h2>TRAILS AND ALES</h2>
+              <p style="margin:0;vertical-align:top">Pair your outdoor adventure with some cold craft brews!</p>
               <br />
-              <p>Pair your outdoor adventure with some craft brews!</p>
             </div>
         </div>
       </div>
