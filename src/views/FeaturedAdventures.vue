@@ -20,13 +20,10 @@
         <div class="col-8 col-12-medium imp-medium">
           <article style="width:90%;height:auto;margin-left:auto;margin-right:auto">
             <span class="image featured"><img src="images/IMG_8282.jpg" alt="" /></span>
-            <p style="font-style:italic;font-color:grey"></p>
+            <p style="font-style:italic;font-color:grey">Traditional territory of the Cheyenne and Očhéthi Šakówiŋ people</p>
           </article>
           <div id="content" style="width:80%;padding:0px 50px">
-            <p><a href="https://primepassages.com/what-is-beer-hiking">What is Beer Hiking?</a></p>
-            <p><a href="https://vinepair.com/articles/11-best-craft-beer-trails-travel/">11 of the Best Craft Beer Trails in America</a></p>
-            <p><a href="https://oct.co/essays/americas-most-beautiful-beer-trails">America's Most Beautiful Beer Trails </a></p>
-            <p><a href="https://beerconnoisseur.com/articles/15-unique-us-ale-trails">15 Unique U.S. Ale Trails</a></p>            
+            <h3>COMING SOON!</h3>
           </div>
         </div>
       </div>
